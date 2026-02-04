@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidential Log ❤️</title>
+    <style>
+        body { background: #fff5f7; font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; text-align: center; }
+        .container { background: white; width: 85%; max-width: 380px; padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        img { width: 100%; border-radius: 15px; margin-bottom: 15px; border: 3px solid #ff4d6d; object-fit: cover; max-height: 250px; }
+        h1 { color: #ff4d6d; font-size: 1.1rem; margin-bottom: 20px; }
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { background: #ff4d6d; color: white; border: none; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.85rem; }
+        #noBtn { background: #fce4ec; color: #ff4d6d; position: relative; }
+        .romantic-text { font-style: italic; color: #884d5a; line-height: 1.6; font-size: 0.9rem; }
+        
+        .shake { animation: shake 0.3s; }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(10px); } 50% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
+
+        .balloon {
+            position: absolute; bottom: -100px; width: 30px; height: 40px;
+            background: #ff4d6d; border-radius: 50%; z-index: 5;
+            animation: flyUp 3s linear forwards;
+        }
+        @keyframes flyUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-card">
+    <div id="p0">
+        <img src="us1.jpg">
+        <h1>Will you be my Valentine, Kokku? 🌹</h1>
+        <div style="display:flex; justify-content:center; gap:15px;">
+            <button onclick="handleCorrect(0)">Yes!</button>
+            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+        </div>
+    </div>
+
+    <div id="p1" style="display:none;">
+        <h1>Q1: When did I officially propose to you? 💍</h1>
+        <div class="options">
+            <button onclick="handleWrong('I will literally kill you... 🔪', 1)">June 18</button>
+            <button onclick="handleWrong('Do you even love me? 😂', 1)">June 19</button>
+            <button onclick="handleCorrect(1)">June 20</button>
+            <button onclick="handleWrong('Try again or I am leaving! 🏃‍♂️', 1)">June 21</button>
+        </div>
+        <p id="w1" style="color:red; font-size:0.7rem; margin-top:10px;"></p>
+    </div>
+
+    <div id="p2" style="display:none;">
+        <h1>Q2: When did you finally say YES to me? 🥰</h1>
+        <div class="options">
+            <button onclick="handleWrong('Nope! Try again 🙄', 2)">July 1</button>
+            <button onclick="handleCorrect(2)">July 4</button>
+            <button onclick="handleWrong('You breaking my heart..', 2)">July 10</button>
+            <button onclick="handleWrong('Wrong date! 💀', 2)">July 20</button>
+        </div>
+        <p id="w2" style="color:red; font-size:0.7rem; margin-top:10px;"></p>
+    </div>
+
+    <div id="p3" style="display:none;">
+        <img src="us1.jpg">
+        <h1>Q3: When was this picture taken? 📸</h1>
+        <div class="options">
+            <button onclick="handleWrong('Too recent!', 3)">Nov 2022</button>
+            <button onclick="handleCorrect(3)">Nov 2020</button>
+            <button onclick="handleWrong('Focus! 😤', 3)">Jan 2021</button>
+            <button onclick="handleWrong('Serious? No.', 3)">Dec 2020</button>
+        </div>
+        <p id="w3" style="color:red; font-size:0.7rem; margin-top:10px;"></p>
+    </div>
+
+    <div id="p4" style="display:none;">
+        <h1>Where should we go together next? ✈️🌍</h1>
+        <div class="options">
+            <button onclick="handleCorrect(4)">Himalayas 🏔️</button>
+            <button onclick="handleCorrect(4)">Thailand 🇹🇭</button>
+            <button onclick="handleCorrect(4)">Vietnam 🇻🇳</button>
+            <button onclick="handleCorrect(4)">Sri Lanka 🇱🇰</button>
+            <button onclick="handleCorrect(4)">Nepal 🇳🇵</button>
+            <button onclick="handleCorrect(4)">Japan 🌸</button>
+        </div>
+    </div>
+
+    <div id="p5" style="display:none;">
+        <img src="us2.jpg">
+        <h1>My Dearest Kokku... ❤️</h1>
+        <div class="romantic-text">
+            <p>"I know the last 20 days have been hard. But no fight is bigger than us."</p>
+            <p>Every memory we've shared is a treasure. Thank you for choosing me every day.</p>
+            <p><strong>Forever Yours. ✨💍</strong></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function createBalloons() {
+        for (let i = 0; i < 15; i++) {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            balloon.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 3000);
+        }
+    }
+
+    function moveNo() {
+        const btn = document.getElementById('noBtn');
+        btn.style.position = 'fixed';
+        btn.style.left = Math.random() * (window.innerWidth - 80) + 'px';
+        btn.style.top = Math.random() * (window.innerHeight - 40) + 'px';
+    }
+
+    function handleCorrect(current) {
+        createBalloons();
+        setTimeout(() => {
+            document.getElementById('p' + current).style.display = 'none';
+            document.getElementById('p' + (current + 1)).style.display = 'block';
+        }, 800);
+    }
+
+    function handleWrong(msg, qNum) {
+        document.getElementById('w' + qNum).innerText = msg;
+        const card = document.getElementById('main-card');
+        card.classList.add('shake');
+        setTimeout(() => card.classList.remove('shake'), 300);
+    }
+</script>
+</body>
+</html>
